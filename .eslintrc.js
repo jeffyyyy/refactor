@@ -126,6 +126,7 @@ module.exports = {
         "array-bracket-spacing": 1,
         "object-property-newline": 1,
         "import/newline-after-import": 1,
-        "no-confusing-arrow": 1
+        "no-confusing-arrow": 1,
+        "linebreak-style": 0
     }
 };

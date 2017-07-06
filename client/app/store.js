@@ -6,7 +6,7 @@ import { createStore, combineReducers, applyMiddleware } from 'redux';
 import { Router, Route, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
 import PeopleReducer from './components/people/reducers/reducers';
-import PeopleComponent from './components/people/components/PeopleComponent';
+import PeopleContainer from './components/people/components/PeopleContainer';
 
 const init = () => {
 
@@ -23,7 +23,7 @@ const init = () => {
   render(
     <Provider store={store}>
       <Router history={history}>
-        <Route path='/' component={PeopleComponent}>
+        <Route path='/' component={PeopleContainer}>
         </Route>
       </Router>
     </Provider>,

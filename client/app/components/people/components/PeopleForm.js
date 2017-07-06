@@ -46,9 +46,9 @@ class PeopleForm extends React.Component {
             <div className='form-group mr-5'>
               <label className='mr-2'>Gender: </label>
               <select className='custom-select' name='gender' onChange={this.updateField}>
-                <option value=''>Both Gender</option>
-                <option value='male'>Male Only</option>
-                <option value='female'>Female Only</option>
+                <option value=''>Both</option>
+                <option value='male'>Male</option>
+                <option value='female'>Female</option>
               </select>
             </div>
 
@@ -56,8 +56,8 @@ class PeopleForm extends React.Component {
               <label className='mr-2'>Age: </label>
               <select className='custom-select mr-1' name='ageFilter' onChange={this.updateField}>
                 <option value='0'>Equal</option>
-                <option value='1'>Larger than</option>
-                <option value='-1'>Smaller than</option>
+                <option value='1'>Older than</option>
+                <option value='-1'>Younger than</option>
               </select>
               <input type='number' name='age' className='form-control col-sm-6' placeholder='eg 15, empty = all' onInput={this.updateField}/>
             </div>

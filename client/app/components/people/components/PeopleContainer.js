@@ -5,7 +5,7 @@ import PeopleForm from './PeopleForm';
 import { requestPeopleListData } from '../actions/actions';
 import '../style/style.scss';
 
-class PeopleComponent extends React.Component {
+class PeopleContainer extends React.Component {
 
   constructor(props) {
     super(props);
@@ -28,15 +28,15 @@ class PeopleComponent extends React.Component {
     if (this.props.peopleList.length) {
       peopleList = (
         <ul>
-            {
-              this.props.peopleList.map((p) => {
-                return (
-                  <li key={p._id}>
-                    {p.name}
-                  </li>
-                )
-              })
-            }
+          {
+            this.props.peopleList.map((p) => {
+              return (
+                <li key={p._id}>
+                  {p.name}
+                </li>
+              )
+            })
+          }
         </ul>
       );
     }
@@ -80,10 +80,10 @@ const mapStateToProps = (state) => {
   };
 }
 
-PeopleComponent.propTypes = {
+PeopleContainer.propTypes = {
   dispatch: PropTypes.func,
   peopleList: PropTypes.array,
   error: PropTypes.string
 }
 
-export default connect(mapStateToProps)(PeopleComponent);
+export default connect(mapStateToProps)(PeopleContainer);

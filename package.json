@@ -1,6 +1,6 @@
 {
   "name": "refactionjs",
-  "version": "1.0.0",
+  "version": "2.0.0",
   "description": "Refactoring exercise for Node",
   "main": "index.js",
   "scripts": {

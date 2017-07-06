@@ -21,26 +21,6 @@ module.exports = {
   //   new webpack.DefinePlugin({ "global.GENTLY": false })
   // ],
   module: {
-    // loaders: [
-    //   {
-    //     test: /\.(js|jsx)$/,
-    //     exclude: /(node_modules)/,
-    //     loader: 'babel-loader',
-    //     query: {
-    //       presets: ['react', 'es2015']
-    //     }
-    //   },
-    //   {
-    //     test: /\.scss?$/,
-    //     use: ExtractTextPlugin.extract({
-    //       use: [{
-    //         loader: "css-loader"
-    //       }, {
-    //         loader: "sass-loader"
-    //       }]
-    //     })
-    //   },
-    // ],
     rules: [
       {
         enforce: 'pre',
