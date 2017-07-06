@@ -1,28 +1,35 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, combineReducers } from 'redux';
-import PeopleReducer from './components/people/reducers';
-import MainComponent from './components/people/PeopleComponent';
-import { Router, Route, browserHistory, IndexRoute } from 'react-router';
+import thunk from 'redux-thunk';
+import { createStore, combineReducers, applyMiddleware } from 'redux';
+import { Router, Route, browserHistory } from 'react-router';
 import { syncHistoryWithStore, routerReducer } from 'react-router-redux';
+import PeopleReducer from './components/people/reducers/reducers';
+import PeopleComponent from './components/people/components/PeopleComponent';
 
-const store = createStore(
-  combineReducers({
-    global: PeopleReducer,
-    routing: routerReducer
-  })
-)
+const init = () => {
 
-const history = syncHistoryWithStore(browserHistory, store);
+  const store = createStore(
+    combineReducers({
+      people: PeopleReducer,
+      routing: routerReducer
+    }),
+    applyMiddleware(thunk)
+  );
 
-render(
-  <Provider store={store}>
-    <Router history={history}>
-      <Route path='/' component={MainComponent}>
-      </Route>
-    </Router>
-  </Provider>,
-  document.getElementById('app')
-)
+  const history = syncHistoryWithStore(browserHistory, store);
 
+  render(
+    <Provider store={store}>
+      <Router history={history}>
+        <Route path='/' component={PeopleComponent}>
+        </Route>
+      </Router>
+    </Provider>,
+    document.getElementById('app')
+  );
+
+}
+
+init();

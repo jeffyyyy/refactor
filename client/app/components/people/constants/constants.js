@@ -1,0 +1,2 @@
+export const RECEIVE_PEOPLE_LIST_DATA = 'RECEIVE_PEOPLE_LIST_DATA';
+export const IS_ERROR = 'IS_ERROR';

@@ -38,4 +38,6 @@ jspm_packages
 
 .vscode
 .idea
-public/js/*.js
+public/js/
+public/css/
+log/*
