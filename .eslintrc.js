@@ -1,6 +1,10 @@
 module.exports = {
     "parser": "babel-eslint",
     "extends": "airbnb",
+    "env": {
+        "browser": true,
+        "node": true
+    },
     "plugins": [
         "import",
         "jsx-a11y",
@@ -22,8 +26,8 @@ module.exports = {
         "import/first": 1,
         "jsx-a11y/no-static-element-interactions": 1,
         "react/no-array-index-key": 1,
-        "react/forbid-prop-types": 1,
-        "react/jsx-filename-extension": 1,
+        "react/forbid-prop-types": 0,
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
         "react/no-unused-prop-types": 1,
         "react/require-default-props": 1,
         "no-useless-escape": 1,
@@ -65,7 +69,7 @@ module.exports = {
         "react/prop-types": 1,
         "react/jsx-max-props-per-line": 1,
         "react/jsx-wrap-multilines": 1,
-        "jsx-a11y/label-has-for": 1,
+        "jsx-a11y/label-has-for": 0,
         "react/sort-comp": 1,
         "react/no-unknown-property": 1,
         "react/prefer-es6-class": 1,
@@ -79,7 +83,7 @@ module.exports = {
         "no-prototype-builtins": 1,
         "no-undef-init": 1,
         "react/no-unescaped-entities": 1,
-        "no-underscore-dangle": 1,
+        "no-underscore-dangle": 0,
         "global-require": 1,
         "react/jsx-equals-spacing": 1,
         "no-loop-func": 1,
@@ -127,6 +131,8 @@ module.exports = {
         "object-property-newline": 1,
         "import/newline-after-import": 1,
         "no-confusing-arrow": 1,
-        "linebreak-style": 0
+        "linebreak-style": 0,
+        "jsx-a11y/href-no-hash": "off",
+        "jsx-a11y/anchor-is-valid": ["warn", { "aspects": ["invalidHref"] }]
     }
 };

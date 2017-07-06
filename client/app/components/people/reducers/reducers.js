@@ -1,14 +1,12 @@
 const initialState = {
   peopleList: [],
   error: ''
-}
+};
 
 export default function PeopleReducer(state = initialState, action) {
-
-  let cloneObj = Object.assign({}, state);
+  const cloneObj = Object.assign({}, state);
 
   switch (action.type) {
-
     case 'RECEIVE_PEOPLE_LIST_DATA':
       cloneObj.peopleList = action.response;
       cloneObj.error = '';
@@ -23,5 +21,4 @@ export default function PeopleReducer(state = initialState, action) {
   }
 
   return cloneObj;
-
 }

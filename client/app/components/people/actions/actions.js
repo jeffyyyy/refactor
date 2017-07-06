@@ -1,34 +1,5 @@
 import * as consts from '../constants/constants';
 
-export function requestPeopleListData(p = {}) {
-  const cloneObj = Object.assign({}, p);
-
-  return dispatch => {
-    return fetch('/api/v1/people', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(cloneObj)
-    })
-      .then((response) => {
-        if (response.status >= 200 && response.status < 300) {
-          return response.json();
-        } else {
-          return response.json().then(err => {throw err;});
-        }
-      })
-      .then((result) => {
-        if (result) {
-          dispatch(receivePeopleListData(p, result));
-        }
-      })
-      .catch((result) => {
-        dispatch(receivePeopleListDataError(p, result.error));
-      })
-  };
-}
-
 /*
  * When api call succeed
  */
@@ -50,3 +21,30 @@ export function receivePeopleListDataError(request, response) {
     response
   };
 }
+
+export function requestPeopleListData(p = {}) {
+  const cloneObj = Object.assign({}, p);
+
+  return dispatch => fetch('/api/v1/people', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(cloneObj)
+  })
+    .then((response) => {
+      if (response.status >= 200 && response.status < 300) {
+        return response.json();
+      }
+      return response.json().then((err) => { throw err; });
+    })
+    .then((result) => {
+      if (result) {
+        dispatch(receivePeopleListData(p, result));
+      }
+    })
+    .catch((result) => {
+      dispatch(receivePeopleListDataError(p, result.error));
+    });
+}
+

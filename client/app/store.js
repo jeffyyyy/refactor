@@ -9,7 +9,6 @@ import PeopleReducer from './components/people/reducers/reducers';
 import PeopleContainer from './components/people/components/PeopleContainer';
 
 const init = () => {
-
   const store = createStore(
     combineReducers({
       people: PeopleReducer,
@@ -23,13 +22,11 @@ const init = () => {
   render(
     <Provider store={store}>
       <Router history={history}>
-        <Route path='/' component={PeopleContainer}>
-        </Route>
+        <Route path='/' component={PeopleContainer} />
       </Router>
     </Provider>,
     document.getElementById('app')
   );
-
-}
+};
 
 init();

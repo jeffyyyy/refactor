@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import isInteger from 'lodash/isInteger';
 
 class PeopleForm extends React.Component {
-
   constructor(props) {
     super(props);
 
@@ -13,27 +12,31 @@ class PeopleForm extends React.Component {
         ageFilter: '0',
         age: ''
       }
-    }
+    };
 
     this.updateField = this.updateField.bind(this);
     this.sendQuery = this.sendQuery.bind(this);
   }
 
-  updateField (e) {
-    let value = e.target.value.trim()
-    let fieldName = e.target.name
-    let formInput = Object.assign({}, this.state.formInput)
+  updateField(e) {
+    let value = e.target.value.trim();
+    const fieldName = e.target.name;
+    const formInput = Object.assign({}, this.state.formInput);
     if (e.target.type === 'number') {
-      value = isInteger(parseInt(value)) ? parseInt(value) : value
+      value = isInteger(parseInt(value, 10)) ? parseInt(value, 10) : value;
     }
     formInput[fieldName] = value;
 
-    this.setState({formInput: formInput });
+    this.setState({ formInput });
   }
 
   sendQuery(e) {
     e.preventDefault();
-    let inputData = Object.assign({}, this.state.formInput, {ageFilter: parseInt(this.state.formInput.ageFilter)});
+    const inputData = Object.assign(
+      {},
+      this.state.formInput,
+      { ageFilter: parseInt(this.state.formInput.ageFilter, 10) }
+    );
     this.props.sendQuery(inputData);
   }
 
@@ -44,8 +47,8 @@ class PeopleForm extends React.Component {
           <form className='form-inline'>
 
             <div className='form-group mr-5'>
-              <label className='mr-2'>Gender: </label>
-              <select className='custom-select' name='gender' onChange={this.updateField}>
+              <label className='mr-2' htmlFor='genderSelector'>Gender: </label>
+              <select className='custom-select' name='gender' id='genderSelector' onChange={this.updateField}>
                 <option value=''>Both</option>
                 <option value='male'>Male</option>
                 <option value='female'>Female</option>
@@ -53,25 +56,31 @@ class PeopleForm extends React.Component {
             </div>
 
             <div className='form-group mr-5'>
-              <label className='mr-2'>Age: </label>
-              <select className='custom-select mr-1' name='ageFilter' onChange={this.updateField}>
+              <label className='mr-2' htmlFor='ageFilter'>Age: </label>
+              <select className='custom-select mr-1' name='ageFilter' id='ageFilter' onChange={this.updateField}>
                 <option value='0'>Equal</option>
                 <option value='1'>Older than</option>
                 <option value='-1'>Younger than</option>
               </select>
-              <input type='number' name='age' className='form-control col-sm-6' placeholder='eg 15, empty = all' onInput={this.updateField}/>
+              <input
+                type='number'
+                name='age'
+                className='form-control col-sm-6'
+                placeholder='eg 15, empty = all'
+                onInput={this.updateField}
+              />
             </div>
 
             <button type='submit' className='btn btn-primary' onClick={this.sendQuery}>Query</button>
           </form>
         </div>
       </div>
-    )
+    );
   }
 }
 
 PeopleForm.propTypes = {
   sendQuery: PropTypes.func.isRequired
-}
+};
 
 export default PeopleForm;

@@ -1,24 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { connect } from 'react-redux'
+import { connect } from 'react-redux';
 import PeopleForm from './PeopleForm';
 import { requestPeopleListData } from '../actions/actions';
 import '../style/style.scss';
 
 class PeopleContainer extends React.Component {
-
   constructor(props) {
     super(props);
 
     this.sendQuery = this.sendQuery.bind(this);
   }
 
-  sendQuery(data) {
-    this.props.dispatch(requestPeopleListData(data));
-  }
-
   componentDidMount() {
     this.props.dispatch(requestPeopleListData());
+  }
+
+  sendQuery(data) {
+    this.props.dispatch(requestPeopleListData(data));
   }
 
   render() {
@@ -29,13 +28,11 @@ class PeopleContainer extends React.Component {
       peopleList = (
         <ul>
           {
-            this.props.peopleList.map((p) => {
-              return (
-                <li key={p._id}>
-                  {p.name}
-                </li>
-              )
-            })
+            this.props.peopleList.map(p => (
+              <li key={p._id}>
+                {p.name}
+              </li>
+            ))
           }
         </ul>
       );
@@ -57,33 +54,28 @@ class PeopleContainer extends React.Component {
           <p className='lead'>By default it shows full record of people list.</p>
           <hr className='my-4' />
 
-          <PeopleForm sendQuery={this.sendQuery}/>
+          <PeopleForm sendQuery={this.sendQuery} />
 
-          <hr className='my-4'/>
+          <hr className='my-4' />
           <h3 className='display-5'>List Result:</h3>
 
           {peopleList}
           {errorBlock}
-          {this.props.children}
-
         </div>
       </div>
-    )
+    );
   }
-
 }
 
-const mapStateToProps = (state) => {
-  return {
-    peopleList: state.people.peopleList,
-    error: state.people.error
-  };
-}
+const mapStateToProps = state => ({
+  peopleList: state.people.peopleList,
+  error: state.people.error
+});
 
 PeopleContainer.propTypes = {
-  dispatch: PropTypes.func,
-  peopleList: PropTypes.array,
-  error: PropTypes.string
-}
+  dispatch: PropTypes.func.isRequired,
+  peopleList: PropTypes.array.isRequired,
+  error: PropTypes.string.isRequired
+};
 
 export default connect(mapStateToProps)(PeopleContainer);
