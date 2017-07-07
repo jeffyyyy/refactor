@@ -22,5 +22,6 @@ npm test
 * Using Webpack to do automatic build.
 * Using ESLint.
 * Improved error handling.
+* Remove hardcoded variables
 * Added server-side logging, writing records to files under folder /log and rotate daily.
 

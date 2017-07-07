@@ -4,7 +4,8 @@
   "description": "Refactoring exercise for Node",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "start:prod": "npm run build && NODE_ENV=production node app.js",
     "prestart": "npm run build",
     "build": "webpack --config webpack.config.js --progress --colors",
     "test": "jest"
