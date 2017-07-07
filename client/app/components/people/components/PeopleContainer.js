@@ -29,7 +29,7 @@ class PeopleContainer extends React.Component {
         <ul>
           {
             this.props.peopleList.map(p => (
-              <li key={p._id}>
+              <li key={p.id}>
                 {p.name}
               </li>
             ))
@@ -72,10 +72,14 @@ const mapStateToProps = state => ({
   error: state.people.error
 });
 
+PeopleContainer.defaultProps = {
+  error: ''
+};
+
 PeopleContainer.propTypes = {
   dispatch: PropTypes.func.isRequired,
   peopleList: PropTypes.array.isRequired,
-  error: PropTypes.string.isRequired
+  error: PropTypes.string
 };
 
 export default connect(mapStateToProps)(PeopleContainer);

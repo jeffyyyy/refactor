@@ -1,3 +1,5 @@
+import * as consts from '../constants/constants';
+
 const initialState = {
   peopleList: [],
   error: ''
@@ -7,12 +9,12 @@ export default function PeopleReducer(state = initialState, action) {
   const cloneObj = Object.assign({}, state);
 
   switch (action.type) {
-    case 'RECEIVE_PEOPLE_LIST_DATA':
-      cloneObj.peopleList = action.response;
-      cloneObj.error = '';
+    case consts.PEOPLE_LOAD_FULFILLED:
+      cloneObj.peopleList = action.payload.data.people;
+      cloneObj.error = action.payload.data.error;
       break;
 
-    case 'IS_ERROR':
+    case consts.IS_ERROR:
       cloneObj.peopleList = [];
       cloneObj.error = action.response;
       break;

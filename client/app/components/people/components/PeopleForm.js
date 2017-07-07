@@ -9,8 +9,8 @@ class PeopleForm extends React.Component {
     this.state = {
       formInput: {
         gender: '',
-        ageFilter: '0',
-        age: ''
+        ageFilter: 0,
+        age: 0
       }
     };
 

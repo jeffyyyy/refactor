@@ -1,19 +1,31 @@
+import { gql } from 'react-apollo';
 import * as consts from '../constants/constants';
+import client from '../../../../client';
 
-/*
- * When api call succeed
- */
-export function receivePeopleListData(request, response) {
-  return {
-    type: consts.RECEIVE_PEOPLE_LIST_DATA,
-    request,
-    response
-  };
-}
+const defaultQueryParameters = {
+  gender: '',
+  ageFilter: 0,
+  age: 0
+};
 
-/*
- * Error action
- */
+export const PEOPLE_QUERY = gql`query (
+    $gender: String,
+    $ageFilter: Int,
+    $age: Int
+  ) {
+    people(
+      gender: $gender,
+      ageFilter: $ageFilter,
+      age: $age
+    ) {
+      id
+      name
+      age
+      gender
+    }
+  }
+`;
+
 export function receivePeopleListDataError(request, response) {
   return {
     type: consts.IS_ERROR,
@@ -22,29 +34,18 @@ export function receivePeopleListDataError(request, response) {
   };
 }
 
-export function requestPeopleListData(p = {}) {
-  const cloneObj = Object.assign({}, p);
-
-  return dispatch => fetch('/api/v1/people', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(cloneObj)
-  })
-    .then((response) => {
-      if (response.status >= 200 && response.status < 300) {
-        return response.json();
-      }
-      return response.json().then((err) => { throw err; });
+export function requestPeopleListData(query = defaultQueryParameters) {
+  return (dispatch) => {
+    dispatch({
+      type: consts.PEOPLE_LOAD,
+      payload: client.query({
+        query: PEOPLE_QUERY,
+        variables: query
+      })
     })
-    .then((result) => {
-      if (result) {
-        dispatch(receivePeopleListData(p, result));
-      }
-    })
-    .catch((result) => {
-      dispatch(receivePeopleListDataError(p, result.error));
-    });
+      .catch(() => {
+        dispatch(receivePeopleListDataError(query, 'Something went wrong'));
+      });
+  };
 }
 

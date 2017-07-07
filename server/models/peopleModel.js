@@ -1,22 +1,10 @@
 /*
  * Database model with helper query method
  */
-
 const _ = require('lodash');
-const Datastore = require('nedb');
-
-const db = new Datastore({
-  filename: 'db.json'
-});
+const db = require('../db/datastore');
 
 module.exports = {
-
-  // load database
-  loadDatabase: (callback) => {
-    db.loadDatabase((err) => {
-      callback(err);
-    });
-  },
 
   // take input parameters and make database query
   queryPeopleRecords: data => new Promise((resolve, reject) => {
