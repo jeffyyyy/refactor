@@ -20,7 +20,7 @@ npm test
 * Using React + Redux on the frontend.
 * Using ES6+ features.
 * Using Webpack to do automatic build.
-* Using ESLint.
+* Using ESLint and fixed all styling issues.
 * Improved error handling.
 * Remove hardcoded variables
 * Added server-side logging, writing records to files under folder /log and rotate daily.
