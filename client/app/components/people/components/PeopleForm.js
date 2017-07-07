@@ -10,7 +10,7 @@ class PeopleForm extends React.Component {
       formInput: {
         gender: '',
         ageFilter: 0,
-        age: 0
+        age: ''
       }
     };
 
@@ -25,6 +25,8 @@ class PeopleForm extends React.Component {
     if (e.target.type === 'number') {
       value = isInteger(parseInt(value, 10)) ? parseInt(value, 10) : value;
     }
+    if (fieldName === 'age' && value <0) value = '';
+
     formInput[fieldName] = value;
 
     this.setState({ formInput });
@@ -35,7 +37,8 @@ class PeopleForm extends React.Component {
     const inputData = Object.assign(
       {},
       this.state.formInput,
-      { ageFilter: parseInt(this.state.formInput.ageFilter, 10) }
+      { ageFilter: parseInt(this.state.formInput.ageFilter, 10) },
+      { age: this.state.formInput.age === '' ? -1 : this.state.formInput.age}
     );
     this.props.sendQuery(inputData);
   }
@@ -65,9 +68,10 @@ class PeopleForm extends React.Component {
               <input
                 type='number'
                 name='age'
+                value={this.state.formInput.age}
                 className='form-control col-sm-6'
                 placeholder='eg 15, empty = all'
-                onInput={this.updateField}
+                onChange={this.updateField}
               />
             </div>
 
