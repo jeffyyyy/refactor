@@ -6,7 +6,7 @@ To run the app:
 npm install
 npm start
 ```
-Browse to [http://localhost:3001](http://localhost:3001)
+Browse to [http://localhost:3000](http://localhost:3000)
 
 To run tests:
 ```

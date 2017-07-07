@@ -1,11 +1,11 @@
 import { gql } from 'react-apollo';
 import * as consts from '../constants/constants';
-import client from '../../../../client';
+import client from '../../../client';
 
 const defaultQueryParameters = {
   gender: '',
   ageFilter: 0,
-  age: -1
+  age: ''
 };
 
 export const PEOPLE_QUERY = gql`query (
