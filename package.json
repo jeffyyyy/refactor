@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon app.js",
+    "prestart": "npm run build",
     "build": "webpack --config webpack.config.js --progress --colors",
-    "webpack": "webpack"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -42,6 +43,7 @@
     "babel-loader": "^7.1.1",
     "babel-preset-es2015": "^6.24.1",
     "babel-preset-react": "^6.24.1",
+    "chai": "^4.0.2",
     "css-loader": "^0.28.4",
     "eslint": "^3.19.0",
     "eslint-config-airbnb": "^15.0.2",
@@ -50,6 +52,14 @@
     "eslint-plugin-jsx-a11y": "^5.1.1",
     "eslint-plugin-react": "^7.1.0",
     "extract-text-webpack-plugin": "^2.1.2",
+    "jest": "^20.0.4",
+    "jest-cli": "^20.0.4",
+    "karma": "^1.7.0",
+    "karma-coverage": "^1.1.1",
+    "karma-mocha": "^1.3.0",
+    "karma-webpack": "^2.0.3",
+    "mocha": "^3.4.2",
+    "mocha-loader": "^1.1.1",
     "morgan": "^1.8.2",
     "node-sass": "^4.5.3",
     "nodemon": "^1.11.0",
@@ -58,5 +68,23 @@
     "style-loader": "^0.18.2",
     "webpack": "^3.0.0",
     "webpack-node-externals": "^1.6.0"
+  },
+  "jest": {
+    "moduleNameMapper": {
+      "^.+\\.(p?css)$": "<rootDir>/jest/CSSStub.js"
+    },
+    "testPathIgnorePatterns": [
+      "/node_modules/"
+    ],
+    "collectCoverage": true,
+    "verbose": true,
+    "modulePathIgnorePatterns": [],
+    "unmockedModulePathPatterns": [
+      "<rootDir>/node_modules/react/",
+      "<rootDir>/node_modules/react-dom/",
+      "<rootDir>/node_modules/react-addons-test-utils/",
+      "<rootDir>/node_modules/fbjs",
+      "<rootDir>/node_modules/core-js"
+    ]
   }
 }

@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-const nodeExternals = require('webpack-node-externals');
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 
 module.exports = {
@@ -8,18 +7,12 @@ module.exports = {
     path: __dirname + '/public/',
     filename: 'js/bundle.js'
   },
-  watch: true,
   resolve: {
     extensions: ['.js', '.jsx', '.css']
   },
   plugins: [
     new ExtractTextPlugin({filename: 'css/main.css'})
   ],
-  // target: 'node',
-  // externals: [nodeExternals()],
-  // plugins: [
-  //   new webpack.DefinePlugin({ "global.GENTLY": false })
-  // ],
   module: {
     rules: [
       {

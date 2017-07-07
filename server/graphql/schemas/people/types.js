@@ -1,7 +1,5 @@
-// import { GraphQLObjectType, GraphQLString, GraphQLInt, GraphQLID } from 'graphql';
 const graphql = require('graphql');
-// import moment from 'moment';
-// import _ from 'lodash';
+const PeopleService = require('../../../services/PeopleService');
 
 const People = new graphql.GraphQLObjectType({
   name: 'people',
@@ -33,4 +31,53 @@ const People = new graphql.GraphQLObjectType({
   }),
 });
 
-module.exports = People;
+const PeopleList = new graphql.GraphQLObjectType({
+  name: 'RootQuery',
+  description: 'The root query',
+  fields: {
+    people: {
+      type: new graphql.GraphQLList(People),
+      description: 'A list of all people',
+      args: {
+        gender: {
+          type: graphql.GraphQLString,
+          defaultValue: ''
+        },
+        ageFilter: {
+          type: graphql.GraphQLInt,
+          defaultValue: 0
+        },
+        age: {
+          type: graphql.GraphQLInt,
+          defaultValue: 0
+        }
+      },
+      resolve(source, { gender, ageFilter, age }) {
+        const queryParameters = {};
+        if (gender) queryParameters.gender = gender;
+        if (age >= 0) {
+          queryParameters.age = {};
+          switch (ageFilter) {
+            case 1:
+              queryParameters.age.$gt = age;
+              break;
+            case -1:
+              queryParameters.age.$lt = age;
+              break;
+            case 0:
+            default:
+              queryParameters.age = age;
+              break;
+          }
+        }
+
+        return PeopleService.find(queryParameters).then(response => response);
+      }
+    },
+  },
+});
+
+module.exports = {
+  People,
+  PeopleList
+};

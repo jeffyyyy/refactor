@@ -3,12 +3,15 @@ const bodyParser = require('body-parser')
 const app = module.exports = express();
 const morgan = require('morgan');
 const path = require('path');
+const fs = require('fs');
 const rfs = require('rotating-file-stream')
 const logDirectory = path.join(__dirname, 'log');
 const accessLogStream = rfs('access.log', {
   interval: '1d', // rotate daily
   path: logDirectory
-})
+});
+
+fs.existsSync(logDirectory) || fs.mkdirSync(logDirectory);
 
 app.use(morgan('combined', {stream: accessLogStream})); //save logs into file, rotate daily
 app.use(bodyParser.json()) // for parsing application/json
@@ -18,6 +21,6 @@ app.set('view engine', 'hbs'); //view engine
 
 require(__dirname + '/server/router/peopleRouter');
 
-app.listen(3000, function () {
-  console.log('Example app listening on port 3000!')
+app.listen(3001, function () {
+  console.log('app started!')
 });
