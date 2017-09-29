@@ -60,7 +60,7 @@ class PeopleForm extends React.Component {
 
             <div className='form-group mr-5'>
               <label className='mr-2' htmlFor='ageFilter'>Age: </label>
-              <select className='custom-select mr-1' name='ageFilter' id='ageFilter' onChange={this.updateField}>
+              <select className='custom-select mr-1 col-sm-4' name='ageFilter' id='ageFilter' onChange={this.updateField}>
                 <option value='0'>Equal</option>
                 <option value='1'>Older than</option>
                 <option value='-1'>Younger than</option>

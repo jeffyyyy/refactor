@@ -5,7 +5,7 @@ import client from '../../../client';
 const defaultQueryParameters = {
   gender: '',
   ageFilter: 0,
-  age: ''
+  age: -1
 };
 
 export const PEOPLE_QUERY = gql`query (
